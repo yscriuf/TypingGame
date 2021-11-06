@@ -1,10 +1,40 @@
 <!DOCTYPE html>
-<html lang="kor" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-    Test
-  </body>
+<html lang="kor">
+
+<head>
+  <meta charset="utf-8">
+  <title>타이핑 게임</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="header">
+      타이핑 게임
+    </div>
+
+    <div class="word">
+      Hello
+    </div>
+
+    <div class="TypingBoxContainer">
+      <input type="text" class="TypingBox" value="" onkeyup="enterKey()">
+    </div>
+
+    <div class="GameInfo">
+      <div>
+        남은시간 : <span class="time">0</span>초
+      </div>
+      <div>
+        획득점수 : <span class="score">0</span>점
+      </div>
+    </div>
+
+    <div class="GameStart">
+      <input type="button" class="loading" value="게임을 불러오는중..." onclick="run()">
+    </div>
+
+  <script src="js/main.js"> </script>
+</body>
+
 </html>

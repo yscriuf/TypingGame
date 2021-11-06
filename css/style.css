@@ -1,0 +1,53 @@
+.header{
+  padding: 20px;
+  background-color: #0080ff;
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  width: 100%;
+}
+
+.word{
+  font-size: 70px;
+  text-align: center;
+  padding: 20px;
+}
+
+body{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.TypingBoxContainer{
+  padding-bottom: 20px;
+}
+
+.TypingBox{
+  padding: 10px;
+  width: 300px;
+}
+
+.GameInfo{
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
+}
+
+.time{
+  font-size: 30px;
+}
+
+.score{
+  font-size: 30px;
+}
+
+.GameStart{
+  padding: 30px;
+}
+
+.loading{
+  cursor: not-allowed;
+  background: #ccc;
+}
