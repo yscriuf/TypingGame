@@ -10,6 +10,7 @@ let time = GAMETIME;
 let isPlaying = false;
 let timer;
 let words = [];
+let FIRST_MESSAGE = "무작위 단어 생성";
 
 buttonChange('게임시작');
 
@@ -17,6 +18,10 @@ buttonChange('게임시작');
 function run(){
   if(!isPlaying){
     getWords();
+    answer.innerText = words[Math.floor(Math.random() * words.length)];
+    console.log(answer.innerText);
+    console.log(Math.floor(Math.random() * words.length));
+    console.log(words.length);
     isPlaying = true;
     time = GAMETIME;
     score = 0;
@@ -27,6 +32,7 @@ function run(){
   else {
     isPlaying = false;
     timeDisplay.innerText = 0;
+    answer.innerText = FIRST_MESSAGE;
     clearInterval(timer);
     buttonChange('게임시작');
   }
@@ -47,7 +53,6 @@ function getWords(){
     // handle error
     console.log(error);
   });
-  answer.innerText = words[Math.floor(Math.random() * words.length)];
 }
 
 // enterKey가 입력됐을 때
@@ -74,6 +79,7 @@ function countDown(){
   if(!isPlaying){
     clearInterval(timer);
     buttonChange('게임시작');
+    answer.innerText = FIRST_MESSAGE;
   }
   timeDisplay.innerText = time
 }
