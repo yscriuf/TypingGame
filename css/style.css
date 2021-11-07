@@ -50,8 +50,8 @@ body{
 
 #toast {
     position: fixed;
-    top: 1%;
-    left: 30%;
+    top: 2%;
+    left: 20%;
     padding: 15px 20px;
     transform: translate(-50%, 10px);
     border-radius: 30px;
