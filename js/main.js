@@ -12,13 +12,14 @@ let timer;
 let words = [];
 let FIRST_MESSAGE = "무작위 단어 생성";
 
+getWords();
 buttonChange('게임시작');
 
 // 게임시작 버튼을 눌렀을 때
 function run(){
   if(!isPlaying){
-    getWords();
     answer.innerText = words[Math.floor(Math.random() * words.length)];
+    console.log('first');
     console.log(answer.innerText);
     console.log(Math.floor(Math.random() * words.length));
     console.log(words.length);
@@ -53,6 +54,7 @@ function getWords(){
     // handle error
     console.log(error);
   });
+  console.log('finish');
 }
 
 // enterKey가 입력됐을 때
