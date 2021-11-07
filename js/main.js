@@ -2,7 +2,7 @@ const userText = document.querySelector('.TypingBox');
 const answer = document.querySelector('.word');
 const scoreDisplay = document.querySelector('.score');
 const timeDisplay = document.querySelector('.time');
-const buttonDisplay = document.querySelector('.loading');
+const buttonDisplay = document.querySelector('#Button-Start');
 const GAMETIME = 5;
 
 let score = 0;
@@ -13,7 +13,6 @@ let words = [];
 let FIRST_MESSAGE = "무작위 단어 생성";
 
 getWords();
-buttonChange('게임시작');
 
 // 게임시작 버튼을 눌렀을 때
 function run(){
@@ -49,12 +48,13 @@ function getWords(){
         words.push(word);
       }
     });
+    buttonChange('게임시작');
+    console.log('finish');
   })
   .catch(function (error) {
     // handle error
     console.log(error);
   });
-  console.log('finish');
 }
 
 // enterKey가 입력됐을 때
@@ -89,5 +89,5 @@ function countDown(){
 // buttonChange 함수
 function buttonChange(text){
   buttonDisplay.value = text;
-  text != '게임을 불러오는중...' ? buttonDisplay.classList.remove('loading') : buttonDisplay.classList.add('loading');
+  text != '게임을 불러오는중...' ? buttonDisplay.classList.remove('disabled') : buttonDisplay.classList.add('disabled');
 }

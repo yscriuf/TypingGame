@@ -47,8 +47,3 @@ body{
 .GameStart{
   padding: 30px;
 }
-
-.loading{
-  cursor: not-allowed;
-  background: #ccc;
-}
