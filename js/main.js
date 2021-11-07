@@ -11,12 +11,14 @@ let isPlaying = false;
 let timer;
 let words = [];
 let FIRST_MESSAGE = "무작위 단어 생성";
+let removeToast;
 
 getWords();
 
 // 게임시작 버튼을 눌렀을 때
 function run(){
   if(!isPlaying){
+    toast('게임이 시작되었습니다!');
     answer.innerText = words[Math.floor(Math.random() * words.length)];
     console.log('first');
     console.log(answer.innerText);
@@ -30,6 +32,7 @@ function run(){
     buttonChange('게임종료');
   }
   else {
+    toast('게임이 종료되었습니다!');
     isPlaying = false;
     timeDisplay.innerText = 0;
     answer.innerText = FIRST_MESSAGE;
@@ -65,11 +68,15 @@ function enterKey(){
     // console.log(answer.innerText);
     if(userText.value == answer.innerText && isPlaying)
     {
+      toast('1점 추가!');
       answer.innerText = words[Math.floor(Math.random() * words.length)];
       time = GAMETIME;
       timeDisplay.innerText = time
       score++;
       scoreDisplay.innerText = score;
+    }
+    else {
+      toast('틀렸습니다!');
     }
     userText.value = '';
   }
@@ -79,6 +86,7 @@ function enterKey(){
 function countDown(){
   time > 0 ? time-- : isPlaying = false;
   if(!isPlaying){
+    toast('게임이 종료되었습니다!');
     clearInterval(timer);
     buttonChange('게임시작');
     answer.innerText = FIRST_MESSAGE;
@@ -90,4 +98,18 @@ function countDown(){
 function buttonChange(text){
   buttonDisplay.value = text;
   text != '게임을 불러오는중...' ? buttonDisplay.classList.remove('disabled') : buttonDisplay.classList.add('disabled');
+}
+
+// Toast Message
+function toast(string) {
+    const toast = document.getElementById("toast");
+
+    toast.classList.contains("reveal") ?
+        (clearTimeout(removeToast), removeToast = setTimeout(function () {
+            document.getElementById("toast").classList.remove("reveal")
+        }, 1000)) :
+        removeToast = setTimeout(function () {
+            document.getElementById("toast").classList.remove("reveal")
+        }, 1000)
+    toast.classList.add("reveal"), toast.innerText = string;
 }
