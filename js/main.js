@@ -113,3 +113,5 @@ function toast(string) {
         }, 1000)
     toast.classList.add("reveal"), toast.innerText = string;
 }
+
+test
