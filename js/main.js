@@ -3,13 +3,16 @@ const answer = document.querySelector('.word');
 const scoreDisplay = document.querySelector('.score');
 const timeDisplay = document.querySelector('.time');
 const buttonDisplay = document.querySelector('#Button-Start');
-const GAMETIME = 5;
+const GAMETIME = 15;
+const CNGTIME = 10;
 
 let score = 0;
+let level = 1;
 let time = GAMETIME;
 let isPlaying = false;
 let timer;
 let words = [];
+let wordsBoss = [];
 let FIRST_MESSAGE = "무작위 단어 생성";
 let removeToast;
 
@@ -19,16 +22,13 @@ getWords();
 function run(){
   if(!isPlaying){
     toast('게임이 시작되었습니다!');
-    answer.innerText = words[Math.floor(Math.random() * words.length)];
-    console.log('first');
-    console.log(answer.innerText);
-    console.log(Math.floor(Math.random() * words.length));
-    console.log(words.length);
     isPlaying = true;
     time = GAMETIME;
     score = 0;
+    level = 1;
     scoreDisplay.innerText = score;
     timer = setInterval(countDown, 1000);
+    answer.innerText = words[Math.floor(Math.random() * words.length)];
     buttonChange('게임종료');
   }
   else {
@@ -44,15 +44,29 @@ function run(){
 // 단어를 무작위로 받아오는 함수
 function getWords(){
   buttonChange('게임을 불러오는중...');
+  words = [];
+  wordsBoss = [];
   axios.get('https://random-word-api.herokuapp.com/word?number=1000')
   .then(function (response) {
     response.data.forEach((word) => {
-      if(word.length < 10){
+      if((word.length > level) && (word.length < (level+4))){
         words.push(word);
       }
+      else if(word.length > 8)
+      {
+        wordsBoss.push(word);
+      }
     });
-    buttonChange('게임시작');
-    console.log('finish');
+    if(level == 1){
+      buttonChange('게임시작');
+    }
+    else
+    {
+      answer.innerText = words[Math.floor(Math.random() * words.length)];
+      time = GAMETIME;
+      buttonChange('게임종료');
+    }
+    console.log(words);
   })
   .catch(function (error) {
     // handle error
@@ -68,12 +82,27 @@ function enterKey(){
     // console.log(answer.innerText);
     if(userText.value == answer.innerText && isPlaying)
     {
-      toast('1점 추가!');
-      answer.innerText = words[Math.floor(Math.random() * words.length)];
       time = GAMETIME;
-      timeDisplay.innerText = time
+      timeDisplay.innerText = time;
       score++;
       scoreDisplay.innerText = score;
+
+      if(!(score%10) && (score > 1)){
+        toast('난이도 업! 잘하고 있어요!');
+        answer.innerText = wordsBoss[Math.floor(Math.random() * wordsBoss.length)];
+        level++;
+      }
+      else if(((score%10) == 1) && (score > 1))
+      {
+        toast('1점 추가!');
+        answer.innerText = '난이도 올라갑니다!';
+        getWords();
+      }
+
+      else{
+        toast('1점 추가!');
+        answer.innerText = words[Math.floor(Math.random() * words.length)];
+      }
     }
     else {
       toast('틀렸습니다!');
@@ -81,7 +110,6 @@ function enterKey(){
     userText.value = '';
   }
 }
-
 // 1초마다 countDown 됨.
 function countDown(){
   time > 0 ? time-- : isPlaying = false;
@@ -113,5 +141,3 @@ function toast(string) {
         }, 1000)
     toast.classList.add("reveal"), toast.innerText = string;
 }
-
-test
