@@ -4,10 +4,13 @@ const scoreDisplay = document.querySelector('.score');
 const timeDisplay = document.querySelector('.time');
 const buttonDisplay = document.querySelector('#Button-Start');
 const GAMETIME = 5;
+const STARTTIME = 3;
 
 let score = 0;
 let time = GAMETIME;
 let isPlaying = false;
+let starttime = 0;
+let func_starttime
 let timer;
 let words = [];
 let FIRST_MESSAGE = "무작위 단어 생성";
@@ -18,18 +21,12 @@ getWords();
 // 게임시작 버튼을 눌렀을 때
 function run(){
   if(!isPlaying){
-    toast('게임이 시작되었습니다!');
-    answer.innerText = words[Math.floor(Math.random() * words.length)];
-    console.log('first');
-    console.log(answer.innerText);
-    console.log(Math.floor(Math.random() * words.length));
-    console.log(words.length);
     isPlaying = true;
-    time = GAMETIME;
-    score = 0;
-    scoreDisplay.innerText = score;
-    timer = setInterval(countDown, 1000);
     buttonChange('게임종료');
+
+    starttime = STARTTIME;
+    toast(`${starttime--}초 뒤 게임이 시작됩니다.`);
+    func_starttime = setInterval(starttimeCount, 1000);
   }
   else {
     toast('게임이 종료되었습니다!');
@@ -37,6 +34,7 @@ function run(){
     timeDisplay.innerText = 0;
     answer.innerText = FIRST_MESSAGE;
     clearInterval(timer);
+    clearInterval(func_starttime);
     buttonChange('게임시작');
   }
 }
@@ -112,6 +110,23 @@ function toast(string) {
             document.getElementById("toast").classList.remove("reveal")
         }, 1000)
     toast.classList.add("reveal"), toast.innerText = string;
-}
+  }
 
-test
+function starttimeCount(){
+  toast(`${starttime}초 뒤 게임이 시작됩니다.`);
+  starttime--;
+  if(starttime < 0){
+    clearInterval(func_starttime);
+
+    toast('게임이 시작되었습니다!');
+    answer.innerText = words[Math.floor(Math.random() * words.length)];
+    console.log('first');
+    console.log(answer.innerText);
+    console.log(Math.floor(Math.random() * words.length));
+    console.log(words.length);
+    time = GAMETIME;
+    score = 0;
+    scoreDisplay.innerText = score;
+    timer = setInterval(countDown, 1000);
+  }
+}
