@@ -1,4 +1,5 @@
 import {toast} from './toast.js'
+import { GAMEINFO, TIMER, words } from './main.js';
 
 const GAMETIME = 5;
 const userText = document.querySelector('.TypingBox');
@@ -7,7 +8,7 @@ const scoreDisplay = document.querySelector('.score');
 const timeDisplay = document.querySelector('.time');
 
 // enterKey가 입력됐을 때
-export var enterKey = function(words, GAMEINFO){
+export var enterKey = function(){
     if(window.event.keyCode == 13)
     {
       if(userText.value == answer.innerText && GAMEINFO.isPlaying)

@@ -10,7 +10,6 @@ const FIRST_MESSAGE = "무작위 단어 생성";
 export var countDown = function(){
     GAMEINFO.time > 0 ? GAMEINFO.time-- : GAMEINFO.isPlaying = false;
     if(!GAMEINFO.isPlaying){
-        console.log('hi');
       toast('게임이 종료되었습니다!');
       clearInterval(TIMER.timer);
       buttonChange('게임시작');
