@@ -1,6 +1,7 @@
 import {toast} from './toast.js'
 import {countDown} from './countDown.js'
-import { GAMEINFO, TIMER, words } from './main.js';
+import { GAMEINFO, TIMER} from './main.js';
+import {words} from './getWords.js';
 
 const FIRST_MESSAGE = "무작위 단어 생성";
 const scoreDisplay = document.querySelector('.score');
@@ -21,4 +22,3 @@ export var startTimeCount = function(){
       TIMER.timer = setInterval(countDown, 1000);
     }
 }
-  

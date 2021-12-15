@@ -1,7 +1,7 @@
 import {toast} from './toast.js'
-import { GAMEINFO, TIMER, words } from './main.js';
+import {GAMEINFO, GAMETIME, TIMER} from './main.js';
+import {getWordsLvUp, words} from './getWords.js';
 
-const GAMETIME = 5;
 const userText = document.querySelector('.TypingBox');
 const answer = document.querySelector('.word');
 const scoreDisplay = document.querySelector('.score');

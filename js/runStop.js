@@ -1,6 +1,7 @@
-import { GAMEINFO, TIMER, words } from './main.js';
+import { GAMEINFO, TIMER} from './main.js';
 import {buttonChange} from './buttonChange.js';
 import {toast} from './toast.js'
+import {reset} from './getWords.js'
 
 const answer = document.querySelector('.word');
 const timeDisplay = document.querySelector('.time');
@@ -15,4 +16,5 @@ export var runStop = function(){
     clearInterval(TIMER.timer);
     clearInterval(TIMER.func_starttime);
     buttonChange('게임시작');
+    reset();
 }

@@ -1,15 +1,14 @@
 import {buttonChange} from './buttonChange.js';
-import {async_getWords, getWords} from './getWords.js';
 import {enterKey} from './enterKey.js'
+import {getWordsLvUp} from './getWords.js'
 import {toast} from './toast.js'
 import {countDown} from './countDown.js'
 import { startTimeCount } from './startTimeCount.js';
 import { runStart } from './runStart.js';
 import { runStop } from './runStop.js';
 
-const GAMETIME = 5;
+let GAMETIME = 5;
 
-let words = [];
 let GAMEINFO = {
   isPlaying : false,
   time : GAMETIME,
@@ -20,9 +19,9 @@ let TIMER = {
   timer : 0,
   func_starttime : 0,
 }
-export {TIMER, GAMEINFO, words};
+export {TIMER, GAMEINFO, GAMETIME};
 
-getWords(words, async_getWords);
+getWordsLvUp();
 
 document.querySelector('#Button-Start').addEventListener('click', run);
 document.querySelector('.TypingBox').addEventListener('keypress', enterKey);

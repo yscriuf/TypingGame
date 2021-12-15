@@ -1,18 +1,32 @@
 import {buttonChange} from './buttonChange.js'
 
+let words = [];
+let wordsBoss = [];
+let level = 0;
+
 // 단어를 무작위로 받아오는 함수
-export var getWords = function(words, callback){
-  buttonChange('게임을 불러오는중...');
+function getWords(){
+  reset();
   axios.get('https://random-word-api.herokuapp.com/word?number=1000')
   .then(function (response) {
     response.data.forEach((word) => {
-      if(word.length < 10){
+      if((word.length > level) && (word.length < (level+4))){
         words.push(word);
       }
+      else if(word.length > 8)
+      {
+        wordsBoss.push(word);
+      }
     });
-    buttonChange('게임시작');
-    console.log('finish');
-    callback(words);
+    if(level == 1){
+      buttonChange('게임시작');
+    }
+    else
+    {
+      answer.innerText = words[Math.floor(Math.random() * words.length)];
+      time = GAMETIME;
+      buttonChange('게임종료');
+    }
   })
   .catch(function (error) {
     // handle error
@@ -20,6 +34,18 @@ export var getWords = function(words, callback){
   });
 }
 
-export var async_getWords = function(words){
-  return words;
+function getWordsLvUp(){
+  buttonChange('게임을 불러오는 중...');
+  level++;
+  getWords();
 }
+
+function reset(mode){
+  switch(mode)
+  {
+    case 1 : level = 0;
+    default : words = []; wordsBoss = []; break;
+  }
+}
+
+export {words, wordsBoss, reset, getWordsLvUp};
