@@ -1,5 +1,7 @@
 # TypingGame
-Vanilla javascript로 구현한 타이핑게임입니다.<br><br>
+Vanilla javascript로 구현한 타이핑게임입니다.
+구현기간 : 2021년 11월 6일 ~ 12월 8일 (약 1달간)
+사용언어 : HTML/CSS/Javascript <br><br>
 
 ## 게임방법
 1. https://jirongkim.github.io/TypingGame/ 접속
@@ -35,16 +37,11 @@ if(window.event.keyCode == 13)
       if(userText.value == answer.innerText && GAMEINFO.isPlaying)
       {
         toast('1점 추가!');
-        answer.innerText = words[Math.floor(Math.random() * words.length)];
-        GAMEINFO.time = GAMETIME;
-        GAMEINFO.score++;
-        timeDisplay.innerText = GAMEINFO.time;
-        scoreDisplay.innerText = GAMEINFO.score;
+        ...
       }
       else {
         toast('틀렸습니다!');
       }
-      userText.value = '';
     }
 ```
 
