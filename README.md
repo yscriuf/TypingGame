@@ -1,6 +1,6 @@
 # TypingGame
-Vanilla javascript로 구현한 타이핑게임입니다.
-구현기간 : 2021년 11월 6일 ~ 12월 8일 (약 1달간)
+Vanilla javascript로 구현한 타이핑게임입니다.<br>
+구현기간 : 2021년 11월 6일 ~ 12월 8일 (약 1달간)<br>
 사용언어 : HTML/CSS/Javascript <br><br>
 
 ## 게임방법
